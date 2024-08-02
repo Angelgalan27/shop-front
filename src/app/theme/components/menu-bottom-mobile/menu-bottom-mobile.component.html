@@ -1,0 +1,6 @@
+<mat-nav-list>
+  <div *ngFor="let option of options">
+    <button class="unique-option mat-menu-item" *ngIf="option.permission ? _permission.hasPermission(option.permission) : true"  [routerLink]="option.routerLink" (click)="_bottomSheetRef.dismiss()">{{option.name |translate}}</button>
+  </div>
+</mat-nav-list>
+

@@ -1,0 +1,41 @@
+<div>
+  <h2>{{'providers.provider'|translate}}</h2>
+  <mat-divider></mat-divider>
+  <form *ngIf="showForm" [formGroup]="form" (submit)="save()">
+    <mat-form-field class="field">
+      <mat-label>{{'providers.cif'|translate}}</mat-label>
+      <input matInput type="text" formControlName="cif" name="cif">
+      <mat-error *ngIf="form.controls['cif'].hasError('required')">
+        {{'providers.msgs.cifIsRequired'|translate}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="field">
+      <mat-label>{{'global.name'|translate}}</mat-label>
+      <input matInput type="text" formControlName="name" name="name">
+      <mat-error *ngIf="form.controls['name'].hasError('required')">
+        {{'global.msgs.nameIsRequired'|translate}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="field">
+      <mat-label>{{'global.email'|translate}}</mat-label>
+      <input matInput type="email" formControlName="email" name="email" >
+      <mat-error *ngIf="form.controls['email'].hasError('email') && !form.controls['email'].hasError('required')">
+        {{'users.msgs.formatEmailInvalid'|translate}}
+      </mat-error>
+      <mat-error *ngIf="form.controls['email'].hasError('required')">
+        {{'users.msgs.emailIsRequires'|translate}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="field">
+      <mat-label>{{'providers.phone'|translate}}</mat-label>
+      <input matInput type="number" formControlName="phone" name="phone" >
+    </mat-form-field>
+
+    <div class="div-btn">
+      <button mat-flat-button type="submit" color="primary"
+      [disabled]="form.invalid">{{'global.save'|translate}}</button>
+      <button mat-flat-button color="warn" (click)="back()">{{'global.cancel'|translate}}</button>
+    </div>
+  </form>
+</div>
+

@@ -1,0 +1,32 @@
+<div class="p-2">
+  <h2 mat-dialog-title class="modal-header">
+    {{'products.attribute' |translate}}
+    <button mat-icon-button (click)="close()">
+      <mat-icon aria-hidden="false" >close</mat-icon>
+    </button>
+  </h2>
+  <mat-divider></mat-divider>
+  <form class="w-9/12 m-auto pt-6" [formGroup]="form" (submit)="add()">
+    <mat-form-field class="w-full mb-2">
+      <mat-label>{{'products.attributeType'|translate}}</mat-label>
+      <mat-select formControlName="attributeType" name="attributeType">
+        <mat-option *ngFor="let attr of attributesTypes" [value]="attr.id"
+         [matTooltip]="attr.description ? attr.description : ''" matTooltipPosition="above">{{attr.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="w-full mb-2">
+      <mat-label>{{'global.description'|translate}}</mat-label>
+      <input matInput type="text" formControlName="description" name="description" >
+      <mat-error *ngIf="form.controls['description'].hasError('required')">
+        {{'global.msgs.descriptionIsRequired'|translate}}
+      </mat-error>
+    </mat-form-field>
+    <div class=" flex justify-around mt-10">
+      <button mat-flat-button type="submit" color="primary"
+      [disabled]="form.invalid">{{'global.save'|translate}}</button>
+      <button mat-flat-button color="warn" (click)="close()">{{'global.cancel'|translate}}</button>
+    </div>
+  </form>
+ </div>
+
+

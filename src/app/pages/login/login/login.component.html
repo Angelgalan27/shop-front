@@ -1,0 +1,29 @@
+<div class="flex justify-center p-32">
+  <mat-card class="w-fit card-login">
+    <mat-card-content >
+      <h1 class="w-full text-center">{{'global.titleMenu' |translate |uppercase}}</h1>
+      <form class=" flex flex-col justify-center p-14" [formGroup]="form" (submit)="login()">
+        <mat-form-field class="field w-96">
+          <mat-label>{{'users.email'|translate}}</mat-label>
+          <input matInput type="email" formControlName="email" name="email" >
+          <mat-error *ngIf="form.controls['email'].hasError('email') && !form.controls['email'].hasError('required')">
+            {{'users.msgs.formatEmailInvalid'|translate}}
+          </mat-error>
+          <mat-error *ngIf="form.controls['email'].hasError('required')">
+            {{'users.msgs.emailIsRequires'|translate}}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="field">
+          <mat-label>{{'users.password'|translate}}</mat-label>
+          <input matInput type="password" formControlName="password" name="password" >
+        </mat-form-field>
+        <div class="div-btn">
+          <button mat-flat-button type="submit" color="primary"
+          [disabled]="form.invalid">{{'global.login'|translate}}</button>
+        </div>
+        </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+

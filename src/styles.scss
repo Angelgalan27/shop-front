@@ -1,0 +1,66 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body { height: 100%; }
+body {
+   margin: 0;
+   font-family: Roboto, "Helvetica Neue", sans-serif;
+   background: #F6F1F1;
+  }
+
+  .div-header-list {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 1em;
+  }
+
+  app-root,
+  app-main-layout{
+    height: 100%;
+    display: block;
+  }
+
+  .unique-option span{
+
+    color: white;
+
+}
+
+.mat-menu-item {
+  display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+    padding: 0;
+    padding-left: 16px;
+    padding-right: 16px;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    box-sizing: border-box;
+    color: inherit;
+    font-size: inherit;
+    background: none;
+    text-decoration: none;
+    margin: 0;
+    min-height: 48px;
+}
+
+.mat-drawer-inner-container {
+  height: 100%;
+  background: radial-gradient(circle, rgb(33, 42, 62) 21%, rgb(57, 72, 103) 53%, rgb(241, 246, 249) 100%);
+}
+
+.tox-promotion,
+.tox-statusbar__right-container {
+  display: none !important;
+}

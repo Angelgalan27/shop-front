@@ -1,0 +1,14 @@
+<div>
+  <div class="div-header-list w-3/4 md:w-full">
+    <h2>{{'users.users'|translate}}</h2>
+    <button mat-fab color="primary" [matTooltip]="'users.addUser'|translate" matTooltipPosition="above" (click)="add()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <mat-divider></mat-divider>
+  <div *ngIf="users" class="div-list">
+    <app-table [columns]="columns" [acciones]="acciones" [clases]="clases"
+    [columnsName] = "columnsName" [displayedColumns]="displayedColumns" [datos]="users"
+    (eventEmmiter)="accionar($event)"></app-table>
+  </div>
+</div>

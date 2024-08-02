@@ -1,0 +1,12 @@
+<mat-card class="p-4" >
+  <div class="flex flex-wrap p-2">
+    <div *ngFor="let image of images" class="flex flex-col justify-center items-center">
+      <img  class="img-product m-8" [src]="image.image" alt="">
+          <button mat-fab color="warn" type="button" (click)="delete(image.file)">
+            <mat-icon>delete</mat-icon>
+          </button>
+    </div>
+  </div>
+</mat-card>
+
+

@@ -1,0 +1,33 @@
+<div>
+    <h2>{{'shops.shop'|translate}}</h2>
+    <mat-divider></mat-divider>
+    <form class="w-full md:w-9/12  m-auto pt-6" [formGroup]="form" (submit)="save()">
+        <mat-slide-toggle class="field" formControlName="online" name="online">{{'shops.online' |translate}}</mat-slide-toggle>
+        <mat-form-field class="w-full mb-2">
+          <mat-label>{{'global.name'|translate}}</mat-label>
+          <input matInput type="text" formControlName="name" name="name">
+          <mat-error *ngIf="form.controls['name'].hasError('required')">
+            {{'users.msgs.nameIsRequired'|translate}}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-full mb-2">
+            <mat-label>{{'shops.url'|translate}}</mat-label>
+            <input matInput type="text" formControlName="url" name="url">
+            <mat-error *ngIf="form.controls['url'].hasError('required')">
+              {{'users.msgs.nameIsRequired'|translate}}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="w-full mb-2">
+            <mat-label>{{'shops.startDate' | translate}}</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="startDate" name="startDate">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <div class=" flex justify-around mt-10">
+            <button mat-flat-button type="submit" color="primary"
+            [disabled]="form.invalid">{{'global.save'|translate}}</button>
+            <button mat-flat-button color="warn" (click)="back()">{{'global.cancel'|translate}}</button>
+          </div>
+     </form>
+ </div>

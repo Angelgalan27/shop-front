@@ -1,0 +1,52 @@
+<div>
+  <h2>{{'users.user'|translate}}</h2>
+  <mat-divider></mat-divider>
+  <form *ngIf="showForm" [formGroup]="form" (submit)="save()">
+    <mat-form-field class="field">
+      <mat-label>{{'global.name'|translate}}</mat-label>
+      <input matInput type="text" formControlName="name" name="name">
+      <mat-error *ngIf="form.controls['name'].hasError('required')">
+        {{'users.msgs.nameIsRequired'|translate}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="field">
+      <mat-label>{{'users.email'|translate}}</mat-label>
+      <input matInput type="email" formControlName="email" name="email" >
+      <mat-error *ngIf="form.controls['email'].hasError('email') && !form.controls['email'].hasError('required')">
+        {{'users.msgs.formatEmailInvalid'|translate}}
+      </mat-error>
+      <mat-error *ngIf="form.controls['email'].hasError('required')">
+        {{'users.msgs.emailIsRequires'|translate}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="field">
+      <mat-label>{{'users.password'|translate}}</mat-label>
+      <input matInput type="password" formControlName="password" name="password" >
+    </mat-form-field>
+    <mat-form-field class="field">
+      <mat-label>{{'users.repeatPassword'|translate}}</mat-label>
+      <input matInput type="password" formControlName="repeatPassword" name="repeatPassword"  >
+    </mat-form-field>
+    <div class="error" *ngIf="form.controls['password'].value !== form.controls['repeatPassword'].value">
+      {{'users.msgs.passwordIsInvalid'|translate}}
+    </div>
+    <mat-form-field class="field">
+      <mat-label>{{'shops.shops'|translate}}</mat-label>
+      <mat-select formControlName="shops" name="shops" multiple>
+        <mat-option *ngFor="let shop of shops" [value]="shop.id" [matTooltip]="shop.description ? shop.description : ''" matTooltipPosition="above">{{shop.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="field">
+      <mat-label>{{'roles.roles'|translate}}</mat-label>
+      <mat-select formControlName="roles" name="roles" multiple>
+        <mat-option *ngFor="let rol of roles" [value]="rol.id" [matTooltip]="rol.description ? rol.description : ''" matTooltipPosition="above">{{rol.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="div-btn">
+      <button mat-flat-button type="submit" color="primary"
+      [disabled]="form.controls['password'].value !== form.controls['repeatPassword'].value || form.invalid">{{'global.save'|translate}}</button>
+      <button mat-flat-button color="warn" (click)="back()">{{'global.cancel'|translate}}</button>
+    </div>
+  </form>
+</div>

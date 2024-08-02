@@ -1,0 +1,51 @@
+<mat-card>
+  <mat-card-content class="header ">
+    <div class="flex-none lg:flex justify-between">
+      <div class="hidden lg:block">
+        <mat-icon class="icon-menu text-white " fontIcon="menu" (click)="changeShowMenu()"></mat-icon>
+      </div>
+      <div class="text-blue-50 text-lg text-center">
+        <div>{{'global.titleMenu'|translate}}</div>
+        <mat-form-field *ngIf="shopSelected">
+          <mat-label>{{'shops.shop' |translate}}</mat-label>
+          <mat-select  (valueChange)="changeShop($event)" [value]="shopSelected.id">
+            <mat-option *ngFor="let shop of user.shops" [value]="shop.id">
+              {{shop.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="text-blue-50 text-lg flex justify-between items-center">
+        <div *ngIf="user" class="flex justify-between mr-6">
+          <mat-icon ><span class="material-symbols-outlined">
+            account_circle
+            </span></mat-icon>
+          {{user.email}}
+        </div>
+        <mat-icon class="cursor-pointer" (click)="logout()" matTooltip="Salir">logout</mat-icon>
+      </div>
+      <div class="hidden md:flex lg:hidden justify-center text-blue-50 mt-3" >
+        <div *ngFor="let option of optionsMenu">
+        <div *ngIf="_permission.hasPermission(option.permission)" class="option-menu">
+          <div *ngIf="!option.isUnique">
+            <button mat-button [matMenuTriggerFor]="menu">{{option.name |translate}}</button>
+            <mat-menu #menu="matMenu" >
+              <div *ngFor="let children of option.children" >
+                <button *ngIf="children.permission ? _permission.hasPermission(children.permission) : true"  mat-menu-item  [routerLink]="children.routerLink">{{children.name |translate}}</button>
+              </div>
+            </mat-menu>
+          </div>
+          <div *ngIf="option.isUnique">
+            <button class="unique-option mat-menu-item" *ngIf="option.permission ? _permission.hasPermission(option.permission) : true"  [routerLink]="option.routerLink">{{option.name |translate}}</button>
+          </div>
+        </div>
+        </div>
+      </div>
+      <div class="flex md:hidden  justify-center icon-menu-mobile">
+        <mat-icon class="icon-menu text-white " fontIcon="menu" (click)="openBottomSheet()"></mat-icon>
+      </div>
+    </div>
+
+  </mat-card-content>
+</mat-card>
+

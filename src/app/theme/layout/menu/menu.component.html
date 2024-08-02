@@ -1,0 +1,21 @@
+
+  <mat-drawer #drawer class="sidenav hidden md:block" styleClass="mat-drawer-menu" mode="side" [opened]="true">
+      <div class="img-menu"></div>
+      <div *ngFor="let option of optionsMenu">
+        <div *ngIf="_permission.hasPermission(option.permission)" class="option-menu">
+          <mat-icon class="icon-menu" aria-hidden="false" >{{option.icon}}</mat-icon>
+          <div *ngIf="!option.isUnique">
+            <button mat-button [matMenuTriggerFor]="menu">{{option.name |translate}}</button>
+            <mat-menu #menu="matMenu" >
+              <div *ngFor="let children of option.children" >
+                <button *ngIf="children.permission ? _permission.hasPermission(children.permission) : true"  mat-menu-item  [routerLink]="children.routerLink">{{children.name |translate}}</button>
+              </div>
+            </mat-menu>
+          </div>
+          <div *ngIf="option.isUnique">
+            <button class="unique-option mat-menu-item" *ngIf="option.permission ? _permission.hasPermission(option.permission) : true"  [routerLink]="option.routerLink">{{option.name |translate}}</button>
+          </div>
+        </div>
+      </div>
+  </mat-drawer>
+

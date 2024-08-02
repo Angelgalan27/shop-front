@@ -1,0 +1,35 @@
+<div>
+  <h2>{{'categories.category'|translate}}</h2>
+  <mat-divider></mat-divider>
+  <form class="w-full md:w-9/12 " *ngIf="showForm" [formGroup]="form" (submit)="save()">
+    <mat-slide-toggle class="field" formControlName="isParent" name="isParent">{{'categories.categoryParent' |translate}}</mat-slide-toggle>
+    <mat-form-field class="field">
+      <mat-label>{{'global.name'|translate}}</mat-label>
+      <input matInput type="text" formControlName="name" name="name">
+      <mat-error *ngIf="form.controls['name'].hasError('required')">
+        {{'global.msgs.nameIsRequired'|translate}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="field">
+      <mat-label>{{'global.description'|translate}}</mat-label>
+      <input matInput type="text" formControlName="description" name="description" >
+      <mat-error *ngIf="form.controls['description'].hasError('required')">
+        {{'global.msgs.descriptionIsRequired'|translate}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="field">
+      <mat-label>{{'categories.categoryParent'|translate}}</mat-label>
+      <mat-select formControlName="parentCategory" name="parentCategory">
+        <mat-option *ngFor="let category of categories" [value]="category.id"
+         [matTooltip]="category.description ? category.description : ''" matTooltipPosition="above">{{category.description}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="div-btn">
+      <button mat-flat-button type="submit" color="primary"
+      [disabled]="form.invalid">{{'global.save'|translate}}</button>
+      <button mat-flat-button color="warn" (click)="back()">{{'global.cancel'|translate}}</button>
+    </div>
+  </form>
+</div>
+

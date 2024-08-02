@@ -1,0 +1,19 @@
+form {
+  width: 70%;
+  margin: auto;
+  padding-top: 3em;
+}
+.field {
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+.div-btn {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 2em;
+}
+
+.error {
+  color: #F44336;
+}

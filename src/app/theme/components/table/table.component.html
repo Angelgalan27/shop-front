@@ -1,0 +1,44 @@
+<table mat-table [dataSource]="datos" class="div-table mt-5">
+  <ng-container [matColumnDef]="column.col" *ngFor="let column of columns; let i = index">
+    <ng-container *ngIf="column.col !== 'acciones'">
+      <mat-header-cell class="header-table" *matHeaderCellDef mat-sort-header [ngClass]="clases[i]"> {{columnsName[i]}}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row" [attr.data-label]="columnsName[i]" [ngClass]="clases[i]">
+        <span *ngIf="column.type === 'text'" class="text-xs md:text-base">{{ (row[column.col] && row[column.col].length>100)? (row[column.col] | slice:0:100)+'...':row[column.col] }}</span>
+        <span *ngIf="column.type === 'object' && column.attribute" class="text-xs md:text-base">{{row[column.col][column.attribute]}}</span>
+        <span *ngIf="column.type === 'boolean'" class="text-xs md:text-base">{{row[column.col] ? 'S' : 'N'}}</span>
+        <span *ngIf="column.type === 'date' " class="text-xs md:text-base">{{row[column.col] |date: 'dd-MM-yyyy'}} </span>
+        <span *ngIf="column.type === 'price' " class="text-xs md:text-base">{{row[column.col]}}€</span>
+        <span *ngIf="column.type === 'image' && row[column.col]" class="hidden md:block"><img [src]="row[column.col]" class="img-product"></span>
+        <span *ngIf="column.type === 'image' && !row[column.col]" class="hidden md:block"><img src="../../../../assets/imagenes/default-image.png" class="img-product"></span>
+
+      </mat-cell>
+    </ng-container>
+    <ng-container *ngIf="column.col === 'acciones'">
+      <mat-header-cell  *matHeaderCellDef class="header-table" [ngClass]="clases[i]"> Acciones </mat-header-cell>
+      <mat-cell *matCellDef="let row" class="no-wrap celda-derecha" [ngClass]="clases[i] + 'flex flex-col md:flex-row'">
+        <button type="button" mat-icon-button *ngFor="let boton of acciones" [color]="boton.color"
+          class="ancho-boton ml5" (click)="accionar(boton.accion, row)"
+          [disabled]="!!boton.condicion? !boton.condicion(row) : false" [title]="boton.nombre">
+          <span *ngIf="!boton.icon">{{boton.nombre}}</span>
+          <mat-icon *ngIf="boton.icon" >{{boton.icon}}</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+  </ng-container>
+<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</table>
+
+<mat-paginator *ngIf="showPagination" #paginator
+               class="mt-8"
+               (page)="handlePageEvent($event)"
+               [length]="totalResult"
+               [pageSize]="5"
+               [showFirstLastButtons]="true"
+               [pageSizeOptions]="[5,10,20,30]"
+               [hidePageSize]="false"
+               [pageIndex]="page"
+
+               aria-label="Select page">
+</mat-paginator>

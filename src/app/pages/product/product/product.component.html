@@ -1,0 +1,90 @@
+<div>
+  <h2>{{'products.product'|translate}}</h2>
+  <mat-divider></mat-divider>
+  <form class="w-full md:w-9/12  m-auto pt-6" *ngIf="showForm" [formGroup]="form" (submit)="save()">
+    <mat-form-field class="w-2/4 mb-2">
+      <mat-label>{{'products.price'|translate}}</mat-label>
+      <input matInput type="text" formControlName="price" name="price">
+      <mat-error *ngIf="form.controls['price'].hasError('required')">
+        {{'users.msgs.nameIsRequired'|translate}}
+      </mat-error>
+      <mat-icon matSuffix>euro</mat-icon>
+    </mat-form-field>
+    <mat-form-field class="w-2/4 mb-2">
+      <mat-label>{{'products.stock'|translate}}</mat-label>
+      <input matInput type="text" formControlName="stock" name="stock">
+    </mat-form-field>
+    <mat-form-field class="w-full mb-2">
+      <mat-label>{{'products.code'|translate}}</mat-label>
+      <input matInput type="text" formControlName="code" name="code">
+      <mat-error *ngIf="form.controls['code'].hasError('required')">
+        {{'users.msgs.nameIsRequired'|translate}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-full mb-2">
+      <mat-label>{{'global.name'|translate}}</mat-label>
+      <input matInput type="text" formControlName="name" name="name">
+      <mat-error *ngIf="form.controls['name'].hasError('required')">
+        {{'users.msgs.nameIsRequired'|translate}}
+      </mat-error>
+    </mat-form-field>
+    <div class="w-full mb-4">
+      <label class="text-lg font-medium">{{'global.description'|translate}}</label>
+      <editor [init]="{
+        base_url: '/tinymce',
+        suffix: '.min'
+      }" formControlName="description" name="description"></editor>
+    </div>
+    <div class="w-full mb-4">
+      <label class="text-lg font-medium">{{'products.characteristics'|translate}}</label>
+      <editor [init]="{
+        base_url: '/tinymce',
+        suffix: '.min'
+      }" formControlName="characteristics" name="characteristics"></editor>
+    </div>
+    <div class="w-full mb-4">
+      <label class="text-lg font-medium">{{'products.specifications'|translate}}</label>
+      <editor [init]="{
+        base_url: '/tinymce',
+        suffix: '.min'
+      }" formControlName="specifications" name="specifications"></editor>
+    </div>
+    <mat-form-field class="w-full mb-2">
+      <mat-label>{{'categories.categories' |translate}}</mat-label>
+      <mat-select formControlName="category" name="category">
+        <mat-option>-- None --</mat-option>
+        <div *ngFor="let category of comboCategories">
+        <mat-option *ngIf="category.childrenCategories == null" [value]="category.id">{{category.description}}</mat-option>
+        <mat-optgroup *ngIf="category.childrenCategories" [label]="category.description ? category.description : ''"
+                      [disabled]="false">
+            <div *ngFor="let children of category.childrenCategories">
+          <mat-option *ngIf="children.childrenCategories == null"  [value]="children.id">{{children.description}}</mat-option>
+          <mat-optgroup *ngIf="children.childrenCategories" [label]="children.description ? children.description : ''"
+                      [disabled]="false">
+            <div *ngFor="let children2 of children.childrenCategories">
+              <mat-option [value]="children2.id">{{children2.description}}</mat-option>
+            </div>
+          </mat-optgroup>
+        </div>
+        </mat-optgroup>
+      </div>
+      </mat-select>
+    </mat-form-field>
+    <div *ngIf="product && product.id" class="w-full mb-4 flex flex-col">
+      <label class="mb-2">{{'products.images'|translate}}</label>
+      <input class="mb-4" #inputHideUpload  type="file" formControlName="file" name="file" multiple (change)="uploadFiles($event)" [hidden]="true">
+      <button mat-fab class="mb-4" type="button" color="primary" aria-label="Example icon button with a delete icon" (click)="addImages()" matTooltip="Añadir imagenes">
+        <mat-icon>upload_file</mat-icon>
+      </button>
+      <app-product-images *ngIf="product && !loadingImages" [product]="product"></app-product-images>
+    </div>
+    <div>
+      <app-product-attribute *ngIf="product" [product]="product"></app-product-attribute>
+    </div>
+    <div class=" flex justify-around mt-10">
+      <button mat-flat-button type="submit" color="primary"
+      [disabled]="form.invalid">{{'global.save'|translate}}</button>
+      <button mat-flat-button color="warn" (click)="back()">{{'global.cancel'|translate}}</button>
+    </div>
+  </form>
+</div>

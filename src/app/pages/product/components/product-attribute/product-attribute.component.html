@@ -1,0 +1,12 @@
+<div class=" mb-5">
+  <div class="flex justify-between items-center w-full mb-5">
+    <h3>{{'products.attributes'|translate}}</h3>
+    <button mat-fab color="primary" type="button" [matTooltip]="'products.addAttribute'|translate" matTooltipPosition="above" (click)="add()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <mat-divider></mat-divider>
+  </div>
+<app-table *ngIf="product && product.attributes && product.attributes.length > 0" [columns]="columns" [acciones]="acciones" [clases]="clases"
+      [columnsName] = "columnsName" [displayedColumns]="displayedColumns" [datos]="attributes"
+      (eventEmmiter)="accionar($event)" [showPagination]="false"></app-table>

@@ -1,0 +1,26 @@
+<div>
+  <div class="div-header-list w-3/4 md:w-full">
+    <h2>{{'products.products'|translate}}</h2>
+    <button mat-fab color="primary" [matTooltip]="'products.addProduct'|translate" matTooltipPosition="above" (click)="add()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 mt-3">
+    <div class="col-span-4 md:col-span-1">
+      <app-filter-products (eventSearch)="getProducts($event)"></app-filter-products>
+    </div>
+    <div class="col-span-4">
+      <app-table [columns]="columns" [acciones]="acciones" [clases]="clases"
+    [columnsName] = "columnsName" [displayedColumns]="displayedColumns" [datos]="products"
+    [totalResult]="totalResult" [page]="page"
+    (eventEmmiter)="accionar($event)" (eventHandlerPage)="handlerEventPage($event)"></app-table>
+    </div>
+  </div>
+  <div class="mt-7">
+
+  </div>
+  <div *ngIf="products" class="div-list">
+
+  </div>
+</div>

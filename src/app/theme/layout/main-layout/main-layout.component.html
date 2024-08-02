@@ -1,0 +1,19 @@
+<div class="h-full">
+  <div>
+    <app-header (eventEmmiterShowMenu)="changeShowMenu($event)"></app-header>
+  </div>
+  <div class="h-full">
+    <div class="main-content">
+      <div  class="menu hidden lg:block" [style]="{'width': widthMenu}">
+        <app-menu [showMenu]="showMenu"></app-menu>
+      </div>
+      <div class="content w-full p-10 lg:p-20" >
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

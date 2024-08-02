@@ -1,0 +1,111 @@
+{
+  "global": {
+    "titleMenu": "SHOP-ADMIN",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "actions": "Acciones",
+    "name": "Nombre",
+    "description": "Descripción",
+    "email": "Email",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "list": "Listado",
+    "new": "Añadir",
+    "exports": "Exportaciones",
+    "value": "Valor",
+    "login": "Entrar",
+    "search": "Buscar",
+    "clean": "Limpiar",
+    "msgs": {
+      "nameIsRequired": "El campo nombre es obligatorio",
+      "descriptionIsRequired": "El campo descripción es obligatorio",
+      "shopSelectedRequired": "Tiene que selecionar una tienda primero",
+      "saveCorrect": "Se ha creado correctamente",
+      "updateCorrect": "Se ha actualizado correctamente"
+    }
+  },
+  "users": {
+    "user": "Usuario",
+    "users": "Usuarios",
+    "email": "Email",
+    "addUser": "Añadir usuario",
+    "password": "Contraseña",
+    "repeatPassword": "Repetir contraseña",
+    "msgs": {
+      "nameIsRequired": "El campo nombre es obligatorio",
+      "emailIsRequires": "El campo email es obligatorio",
+      "formatEmailInvalid": "El email introducido no contiene un formato correcto",
+      "passwordIsInvalid": "Las contraseñas no coinciden"
+    }
+  },
+  "roles": {
+    "roles": "Roles",
+    "rol": "Rol",
+    "addRol": "Añadir rol",
+    "actions": "Acciones"
+  },
+  "shops": {
+    "shops": "Tiendas",
+    "shop": "Tienda",
+    "url": "URL",
+    "online": "Online",
+    "system": "Sistema",
+    "startDate": "Fecha Inicio",
+    "addShop": "Añadir tienda"
+  },
+  "categories": {
+    "categories": "Categorias",
+    "category": "Categoria",
+    "categoryParent": "Categoria padre",
+    "addCategory": "Añadir categoria"
+  },
+  "providers": {
+    "providers": "Proveedores",
+    "provider": "Proveedor",
+    "addProvider": "Añadir proveedor",
+    "phone": "Teléfono",
+    "cif": "CIF",
+    "msgs": {
+      "cifIsRequired": "El campo CIF es obligatorio"
+    }
+  },
+  "products": {
+    "products": "Productos",
+    "product": "Producto",
+    "addProduct": "Añadir producto",
+    "category": "Categoria",
+    "attributes": "Atributos",
+    "attribute": "Atributo",
+    "attributeType": "Tipo de atributo",
+    "addAttribute": "Añadir atributo",
+    "images": "Imagenes",
+    "code": "Código",
+    "price": "Precio",
+    "stock": "Stock",
+    "characteristics": "Características",
+    "specifications": "Especificaciones"
+  },
+  "store": {
+    "store": "Almacen"
+  },
+  "entranceProductStock": {
+    "entranceProductStock": "Entrada Stock de productos",
+    "addProductStock": "Añadir stock de producto",
+    "totalUnits": "Total unidades",
+    "totalCost": "Coste total",
+    "buyPrice": "Precio compra/unidad"
+  },
+  "bills": {
+    "bills": "Facturas",
+    "bill": "Factura"
+  },
+  "sellings": {
+    "sellings": "Ventas",
+    "sell": "Venta"
+  },
+  "attributesTypes": {
+    "attributeType": "Tipo de atributo",
+    "attributesTypes": "Tipos de atributos",
+    "addAttributeType": "Añadir tipo de atributo"
+  }
+}
