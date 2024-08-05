@@ -70,9 +70,9 @@
       </div>
       </mat-select>
     </mat-form-field>
-    <div *ngIf="product && product.id" class="w-full mb-4 flex flex-col">
+    <div class="w-full mb-4 flex flex-col">
       <label class="mb-2">{{'products.images'|translate}}</label>
-      <input class="mb-4" #inputHideUpload  type="file" formControlName="file" name="file" multiple (change)="uploadFiles($event)" [hidden]="true">
+      <input class="mb-4" #inputHideUpload  type="file" formControlName="file" name="file" multiple (change)="getFiles($event)" [hidden]="true">
       <button mat-fab class="mb-4" type="button" color="primary" aria-label="Example icon button with a delete icon" (click)="addImages()" matTooltip="Añadir imagenes">
         <mat-icon>upload_file</mat-icon>
       </button>

@@ -15,8 +15,8 @@ export class SecurityService {
       this._auth.authenticate(authenticateRequest)
       .subscribe(result => {
         if (result.token) {
-          localStorage.setItem('token', result.token);
-          localStorage.setItem('user', JSON.stringify(result.user));
+          sessionStorage.setItem('token', result.token);
+          sessionStorage.setItem('user', JSON.stringify(result.user));
           resolve(true);
         } else {
           resolve(false);
@@ -27,22 +27,22 @@ export class SecurityService {
 
 
   getTokenLocalStorage(): string {
-    return localStorage.getItem('token') as string;
+    return sessionStorage.getItem('token') as string;
   }
 
   isUserLoged() {
-    const token = localStorage.getItem('token') as string;
+    const token = sessionStorage.getItem('token') as string;
     return token ? true : false;
   }
 
   getUserLoged(): UserModel {
-    return JSON.parse(localStorage.getItem('user') as string) as UserModel;
+    return JSON.parse(sessionStorage.getItem('user') as string) as UserModel;
   }
 
   logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    localStorage.removeItem('shopSelected');
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('user');
+    sessionStorage.removeItem('shopSelected');
   }
 
 }

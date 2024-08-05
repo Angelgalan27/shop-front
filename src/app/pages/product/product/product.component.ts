@@ -92,7 +92,9 @@ export class ProductComponent {
     } else {
       this._product.save(this.product)
       .pipe(take(1))
-      .subscribe(() => {
+      .subscribe((product) => {
+        this.product = product;
+        this.uploadFiles();
         this._global.openSnackBar('Se ha creado correctamente', 'Producto');
         this.back();
       });
@@ -152,9 +154,15 @@ export class ProductComponent {
     this.inputHideUpload.nativeElement.click();
   }
 
-  uploadFiles(event: any) {
+  getFiles(event: any) {
     this.loadingImages = true;
     this.files = Array.from(event.target.files);
+    if (this.product.id) {
+      this.uploadFiles();
+    }
+  }
+
+  uploadFiles() {
     this._product.uploadFiles(this.product.id as string, this.files)
     .subscribe((res) => {
       this._global.openSnackBar(res.descripcion as string , 'Producto');

@@ -15,14 +15,19 @@ export class ProductListComponent {
   columns!: ColumnsParametroListado[];
   columnsName: string[] = [this._translate.instant('products.code'), this._translate.instant('global.name')
   ,this._translate.instant('products.category'),
+  this._translate.instant('products.price'),
   this._translate.instant('products.stock'), ''
   , this._translate.instant('global.actions')];
-  clases: string[] = ['','','','hidden md:flex','hidden md:block',''];
+  clases: string[] = ['','','','','hidden md:flex','hidden md:block',''];
   acciones!: ParametrosAcciones[];
   products!: ProductModel[];
-  displayedColumns: string[] = ['code','name', 'category', 'stock', 'imageList','acciones'];
+  displayedColumns: string[] = ['code','name', 'category','price', 'stock', 'imageList','acciones'];
   totalResult!: any;
   page!: any;
+  loadDataFinish: boolean = false;
+  currentPage: number = 0;
+  currentSize: number = 5;
+  currentFilter: ProductFilter = {};
   constructor(private _translate: TranslateService,
     private _global: GlobalService,
     private _router: Router,
@@ -32,6 +37,7 @@ export class ProductListComponent {
         { col: 'code', type: 'text' },
         { col: 'name', type: 'text' },
         { col: 'category', type: 'object', attribute: 'description'},
+        {col: 'price', type: 'price'},
         {col: 'stock', type: 'text'},
         {col: 'imageList', type: 'image'},
         { col: 'acciones', type: 'btn' }
@@ -43,7 +49,7 @@ export class ProductListComponent {
     }
 
     private getFiles(product: ProductModel) {
-        if (product.files) {
+        if (product.files && product.files?.length > 0) {
         this._product.getFiles(product.files[0])
         .subscribe((fileBlob: Blob) => {
           const productFind: any =  this.products.find(productFind => productFind.id === product.id);
@@ -95,9 +101,14 @@ export class ProductListComponent {
       this._global.openSnackBar(this._translate.instant('global.msgs.shopSelectedRequired'), 'error');
       this._router.navigate(['/page/home']);
     }
-
-
-    this._product.getAllByFilter(shop.id as string, filter)
+    if (filter && filter.page === undefined && this.currentFilter.page != undefined) {
+      filter.page = this.currentFilter.page;
+    }
+    if (filter && filter.numberResult === undefined && this.currentFilter.numberResult != undefined) {
+      filter.numberResult = this.currentFilter.numberResult;
+    }
+    this.currentFilter = filter ? filter as ProductFilter : this.currentFilter;
+    this._product.getAllByFilter(shop.id as string, this.currentFilter)
     .pipe(take(1))
     .subscribe(products => {
       this.products = products.products as ProductModel[];
@@ -105,15 +116,16 @@ export class ProductListComponent {
       this.totalResult = products.totalResult;
       this.products.forEach(product => {
         this.getFiles(product);
+        if (product.id === this.products[this.products.length - 1].id) {
+          this.loadDataFinish = true;
+        }
       });
     });
   }
 
   handlerEventPage(pagination: {length: number, pageIndex: number, pageSize: number, previousPageIndex: number}) {
-    let filter: ProductFilter = {
-      page: pagination ? pagination.pageIndex : 0,
-      numberResult: pagination ? pagination.pageSize : 10
-    };
-    this.getProducts(filter);
+    this.currentFilter.page = pagination ? pagination.pageIndex : 0;
+    this.currentFilter.numberResult = pagination ? pagination.pageSize : 5;
+    this.getProducts();
   }
 }

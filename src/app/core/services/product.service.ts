@@ -19,10 +19,13 @@ export class ProductService extends BaseService<ProductModel, string> {
      }
 
      getAllByFilter(shopId: string, filter?: ProductFilter): Observable<ProductPageableRequest> {
-      if (filter && !filter.page) {
+      if (filter && filter.page === undefined) {
         filter.page = 0;
+      }
+      if(filter && filter.numberResult === undefined){
         filter.numberResult = 5;
-      } else if (!filter) {
+      }
+      if (!filter) {
         filter = {page: 0, numberResult: 5};
       }
       return new Observable<ProductPageableRequest>((observer) => {

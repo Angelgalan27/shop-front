@@ -11,7 +11,7 @@
       <app-filter-products (eventSearch)="getProducts($event)"></app-filter-products>
     </div>
     <div class="col-span-4">
-      <app-table [columns]="columns" [acciones]="acciones" [clases]="clases"
+      <app-table *ngIf="loadDataFinish" [columns]="columns" [acciones]="acciones" [clases]="clases"
     [columnsName] = "columnsName" [displayedColumns]="displayedColumns" [datos]="products"
     [totalResult]="totalResult" [page]="page"
     (eventEmmiter)="accionar($event)" (eventHandlerPage)="handlerEventPage($event)"></app-table>
